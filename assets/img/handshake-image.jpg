@@ -1,0 +1,5 @@
+<svg width="800" height="600" xmlns="http://www.w3.org/2000/svg">
+  <rect width="800" height="600" fill="#e3f2fd"/>
+  <text x="400" y="300" font-family="Arial" font-size="32" fill="#1a2b5f" text-anchor="middle">Business Handshake</text>
+  <text x="400" y="340" font-family="Arial" font-size="18" fill="#666" text-anchor="middle">Partnership & Trust</text>
+</svg>
