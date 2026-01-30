@@ -260,20 +260,22 @@ img {
     background-repeat: no-repeat;
     transform: translateX(100%);
     /* Start off-screen right */
-    transition: transform 4s ease-in-out;
-    /* Extremely smooth and slow slide */
     z-index: 1;
+    transition: none;
+    /* Reset position instantly */
 }
 
 .slide.active {
     transform: translateX(0);
     /* Final position centered */
+    transition: transform 1.5s ease-in-out;
     z-index: 2;
 }
 
 .slide.prev {
     transform: translateX(-100%);
     /* Slide out to the left */
+    transition: transform 1.5s ease-in-out;
     z-index: 1;
 }
 
@@ -1387,6 +1389,7 @@ html {
 .specialists-section {
     background: var(--white);
 }
+
 /* Our Doctors */
 .doctors-grid {
     display: grid;
@@ -1418,6 +1421,7 @@ html {
 
 .doctor-info {
     padding: 20px;
+    text-align: center;
 }
 
 .doctor-name {
@@ -1556,14 +1560,14 @@ html {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
     border-left: 5px solid var(--accent-teal);
     transition: var(--transition);
 }
 
 .job-item:hover {
     transform: translateX(10px);
-    box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
 }
 
 .job-info h3 {
@@ -1629,9 +1633,17 @@ html {
     letter-spacing: 1px;
 }
 
-.plan-header.silver { color: #8e8e8e; }
-.plan-header.gold { color: #d4af37; }
-.plan-header.platinum { color: var(--sky-blue); }
+.plan-header.silver {
+    color: #8e8e8e;
+}
+
+.plan-header.gold {
+    color: #d4af37;
+}
+
+.plan-header.platinum {
+    color: var(--sky-blue);
+}
 
 .bima-table td:not(:first-child) {
     text-align: center;
@@ -1660,4 +1672,110 @@ html {
     .features-grid {
         grid-template-columns: 1fr;
     }
+}
+
+/* Coverage Items */
+.coverage-item {
+    display: flex;
+    gap: 60px;
+    align-items: center;
+    margin-bottom: 80px;
+}
+
+.coverage-item:last-child {
+    margin-bottom: 0;
+}
+
+.coverage-item.reverse {
+    flex-direction: row-reverse;
+}
+
+.coverage-text {
+    flex: 1;
+}
+
+.coverage-image {
+    flex: 1;
+}
+
+.coverage-image img {
+    width: 100%;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+.coverage-text h3 {
+    font-size: 28px;
+    color: var(--primary-navy);
+    margin-bottom: 20px;
+}
+
+.coverage-text p {
+    color: var(--text-gray);
+    line-height: 1.8;
+}
+
+@media (max-width: 768px) {
+
+    .coverage-item,
+    .coverage-item.reverse {
+        flex-direction: column;
+        gap: 30px;
+        margin-bottom: 50px;
+    }
+}
+
+.terms-list {
+    list-style: none;
+    padding: 0;
+    margin-top: 15px;
+}
+
+.terms-list li {
+    position: relative;
+    padding-left: 25px;
+    margin-bottom: 12px;
+    color: var(--text-gray);
+    line-height: 1.6;
+}
+
+.terms-list li::before {
+    content: "?";
+    position: absolute;
+    left: 0;
+    color: var(--accent-teal);
+    font-weight: bold;
+}
+
+/* Enhanced Bima Table for Sehat Page */
+.bima-table thead tr {
+    background-color: var(--sky-blue);
+}
+
+.bima-table th {
+    color: var(--white);
+    text-transform: uppercase;
+    font-size: 14px;
+    letter-spacing: 0.5px;
+    border: none;
+}
+
+.bima-table td {
+    text-align: center;
+    border: 1px solid #edf2f7;
+}
+
+.bima-table td:first-child {
+    text-align: left;
+    background-color: #fcfcfc;
+    font-weight: 500;
+    color: var(--primary-navy);
+}
+
+.bima-table tr:nth-child(even) {
+    background-color: #f9fafb;
+}
+
+.bima-table tr:hover {
+    background-color: #f3f4f6;
 }
