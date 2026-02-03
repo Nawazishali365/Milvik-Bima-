@@ -75,16 +75,19 @@ function initHeroSlider() {
 
 // Initialize all components
 document.addEventListener('DOMContentLoaded', () => {
-    // Existing initializations (wrapped in functions or directly called)
-    // For now, we'll just call initHeroSlider and keep existing listeners.
-    // A full refactor would involve wrapping all existing listeners into init functions.
-    initHeroSlider(); // Start the slider
-
     // Dynamic Copyright Year
-    const yearSpan = document.getElementById('currentYear');
-    if (yearSpan) {
-        yearSpan.textContent = new Date().getFullYear();
-    }
+    const updateCopyrightYear = () => {
+        const yearSpan = document.getElementById('currentYear');
+        if (yearSpan) {
+            yearSpan.textContent = new Date().getFullYear();
+        }
+    };
+
+    // Run immediately
+    updateCopyrightYear();
+
+    // Existing initializations
+    initHeroSlider();
 });
 
 // Smooth Scrolling for Navigation Links
