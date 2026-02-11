@@ -77,11 +77,22 @@ function initHeroSlider() {
 document.addEventListener('DOMContentLoaded', () => {
     // Dynamic Copyright Year
     const updateCopyrightYear = () => {
-        const yearSpan = document.getElementById('currentYear');
         if (yearSpan) {
             yearSpan.textContent = new Date().getFullYear();
         }
     };
+
+    // Terms and Conditions Toggle
+    const toggleTermsBtn = document.getElementById('toggleTermsBtn');
+    const termsContent = document.getElementById('termsContent');
+
+    if (toggleTermsBtn && termsContent) {
+        toggleTermsBtn.addEventListener('click', () => {
+            const isHidden = termsContent.style.display === 'none';
+            termsContent.style.display = isHidden ? 'block' : 'none';
+            toggleTermsBtn.textContent = isHidden ? 'Hide Full Terms & Conditions' : 'Read Full Terms & Conditions';
+        });
+    }
 
     // Run immediately
     updateCopyrightYear();
