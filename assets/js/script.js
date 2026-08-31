@@ -110,6 +110,7 @@ function renderUnifiedFooter() {
                         <li><a href="#">Life Insurance</a></li>
                         <li><a href="bima-sehat.html">Health Insurance</a></li>
                         <li><a href="bundle-insurance.html">Bundle Insurance</a></li>
+                        <li><a href="bcare-lite.html">B-Care Lite</a></li>
                         <li><a href="personal-accident-insurance.html">Claims</a></li>
                         <li><a href="refund-policy.html">Refund Policy</a></li>
                     </ul>
@@ -119,7 +120,7 @@ function renderUnifiedFooter() {
                     <h4>Contact Us</h4>
                     <ul class="contact-info">
                         <li>📞 <a href="tel:+9242111119878" style="color: rgba(255, 255, 255, 0.8); text-decoration: none;">042 111 119 878</a></li>
-                        <li>✉️ <a href="mailto:Customer.Care@milvikpakistan.com" style="color: rgba(255, 255, 255, 0.8); text-decoration: none;">Customer.Care@milvikpakistan.com</a></li>
+                        <li>✉️ <a href="mailto:customer.care@milvikpakistan.com" style="color: rgba(255, 255, 255, 0.8); text-decoration: none;">Customer.Care@milvikpakistan.com</a></li>
                         <li>📍 <a href="https://www.google.com/maps/search/?api=1&query=New,+Liberty+Towers,+Model+Town+Link+Rd,+Bhatti+Colony,+Lahore" target="_blank" style="color: rgba(255, 255, 255, 0.8); text-decoration: none;">New, Liberty Towers, Model Town Link Rd, Lahore</a></li>
                     </ul>
                 </div>
@@ -151,7 +152,15 @@ function renderUnifiedFooter() {
         }
     };
 
-    applyFooter(footerTemplate);
+    // Try fetching external component if hosted, fallback immediately to embedded template
+    if (window.location.protocol.startsWith('http')) {
+        fetch('components/footer.html')
+            .then(res => res.text())
+            .then(html => applyFooter(html))
+            .catch(() => applyFooter(footerTemplate));
+    } else {
+        applyFooter(footerTemplate);
+    }
 }
 
 // Initialize all components
