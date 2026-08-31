@@ -73,29 +73,99 @@ function initHeroSlider() {
     setInterval(nextSlide, intervalTime);
 }
 
-// Initialize all components
-document.addEventListener('DOMContentLoaded', () => {
-    // Dynamic Copyright Year
-    const updateCopyrightYear = () => {
+// Unified Single Site Footer Renderer
+function renderUnifiedFooter() {
+    const footers = document.querySelectorAll('footer.footer, #site-footer');
+    if (footers.length === 0) return;
+
+    const footerTemplate = `
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <div class="logo">
+                        <a href="index.html"><img src="assets/img/logo.png" alt="BIMA" class="logo-img"></a>
+                    </div>
+                    <p>Your trusted partner in health and life insurance. Protecting families since 2010.</p>
+                    <div class="social-links">
+                        <a href="https://www.facebook.com/bimapakistan/" target="_blank" aria-label="Facebook">f</a>
+                        <a href="https://www.youtube.com/@BIMAPakistan" target="_blank" aria-label="Youtube">y</a>
+                        <a href="https://www.instagram.com/bimapakistan/" target="_blank" aria-label="Instagram">i</a>
+                        <a href="https://www.linkedin.com/company/milvik-bima-mobile-pakistan/mycompany/" target="_blank" aria-label="LinkedIn">in</a>
+                    </div>
+                </div>
+
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="doctors.html">Our Doctors</a></li>
+                        <li><a href="careers.html">Careers</a></li>
+                        <li><a href="faq.html">FAQ</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-section">
+                    <h4>Services</h4>
+                    <ul>
+                        <li><a href="#">Life Insurance</a></li>
+                        <li><a href="bima-sehat.html">Health Insurance</a></li>
+                        <li><a href="bundle-insurance.html">Bundle Insurance</a></li>
+                        <li><a href="personal-accident-insurance.html">Claims</a></li>
+                        <li><a href="refund-policy.html">Refund Policy</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-section">
+                    <h4>Contact Us</h4>
+                    <ul class="contact-info">
+                        <li>📞 <a href="tel:+9242111119878" style="color: rgba(255, 255, 255, 0.8); text-decoration: none;">042 111 119 878</a></li>
+                        <li>✉️ <a href="mailto:Customer.Care@milvikpakistan.com" style="color: rgba(255, 255, 255, 0.8); text-decoration: none;">Customer.Care@milvikpakistan.com</a></li>
+                        <li>📍 <a href="https://www.google.com/maps/search/?api=1&query=New,+Liberty+Towers,+Model+Town+Link+Rd,+Bhatti+Colony,+Lahore" target="_blank" style="color: rgba(255, 255, 255, 0.8); text-decoration: none;">New, Liberty Towers, Model Town Link Rd, Lahore</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>&copy; <span id="currentYear">${new Date().getFullYear()}</span> Bima Insurance. All rights reserved. | <a href="#">Privacy Policy</a> | <a href="#">Terms of Service</a> | <a href="refund-policy.html">Refund Policy</a></p>
+            </div>
+        </div>
+    `;
+
+    const applyFooter = (html) => {
+        footers.forEach(footer => {
+            footer.innerHTML = html;
+        });
+
+        // Highlight active page link in footer
+        const pageName = window.location.pathname.split('/').pop() || 'index.html';
+        document.querySelectorAll('.footer a').forEach(link => {
+            const href = link.getAttribute('href');
+            if (href && href === pageName) {
+                link.classList.add('active');
+            }
+        });
+
+        const yearSpan = document.getElementById('currentYear');
         if (yearSpan) {
             yearSpan.textContent = new Date().getFullYear();
         }
     };
 
-    // Terms and Conditions Toggle
-    const toggleTermsBtn = document.getElementById('toggleTermsBtn');
-    const termsContent = document.getElementById('termsContent');
-
-    if (toggleTermsBtn && termsContent) {
-        toggleTermsBtn.addEventListener('click', () => {
-            const isHidden = termsContent.style.display === 'none';
-            termsContent.style.display = isHidden ? 'block' : 'none';
-            toggleTermsBtn.textContent = isHidden ? 'Hide Full Terms & Conditions' : 'Read Full Terms & Conditions';
-        });
+    // Try fetching external component if hosted, fallback immediately to embedded template
+    if (window.location.protocol.startsWith('http')) {
+        fetch('components/footer.html')
+            .then(res => res.text())
+            .then(html => applyFooter(html))
+            .catch(() => applyFooter(footerTemplate));
+    } else {
+        applyFooter(footerTemplate);
     }
+}
 
-    // Run immediately
-    updateCopyrightYear();
+// Initialize all components
+document.addEventListener('DOMContentLoaded', () => {
+    // Render Unified Site Footer
+    renderUnifiedFooter();
 
     // Existing initializations
     initHeroSlider();
