@@ -151,15 +151,7 @@ function renderUnifiedFooter() {
         }
     };
 
-    // Try fetching external component if hosted, fallback immediately to embedded template
-    if (window.location.protocol.startsWith('http')) {
-        fetch('components/footer.html')
-            .then(res => res.text())
-            .then(html => applyFooter(html))
-            .catch(() => applyFooter(footerTemplate));
-    } else {
-        applyFooter(footerTemplate);
-    }
+    applyFooter(footerTemplate);
 }
 
 // Initialize all components
