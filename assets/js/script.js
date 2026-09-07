@@ -127,7 +127,7 @@ function renderUnifiedFooter() {
             </div>
 
             <div class="footer-bottom">
-                <p>&copy; <span id="currentYear">${new Date().getFullYear()}</span> Bima Insurance. All rights reserved. | <a href="#">Privacy Policy</a> | <a href="#">Terms of Service</a> | <a href="refund-policy.html">Refund Policy</a></p>
+                <p>&copy; <span id="currentYear">${new Date().getFullYear()}</span> Bima Insurance. All rights reserved. | <a href="#">Privacy Policy</a> | <a href="bcare-lite-terms.html">Terms of Service</a> | <a href="refund-policy.html">Refund Policy</a></p>
             </div>
         </div>
     `;
